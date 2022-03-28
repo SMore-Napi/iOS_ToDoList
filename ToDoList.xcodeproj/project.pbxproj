@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63855C7227F2587E00B8C402 /* ToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63855C7127F2587E00B8C402 /* ToDoCell.swift */; };
 		63B261C027F230D1005C7E93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B261BF27F230D1005C7E93 /* AppDelegate.swift */; };
 		63B261C227F230D1005C7E93 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B261C127F230D1005C7E93 /* SceneDelegate.swift */; };
 		63B261C427F230D1005C7E93 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B261C327F230D1005C7E93 /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		63855C7127F2587E00B8C402 /* ToDoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCell.swift; sourceTree = "<group>"; };
 		63B261BC27F230D1005C7E93 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B261BF27F230D1005C7E93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63B261C127F230D1005C7E93 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				63B261D527F23410005C7E93 /* ToDo.swift */,
+				63855C7127F2587E00B8C402 /* ToDoCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 			files = (
 				63B261DC27F24624005C7E93 /* ToDoDetailTableViewController.swift in Sources */,
 				63B261C427F230D1005C7E93 /* ViewController.swift in Sources */,
+				63855C7227F2587E00B8C402 /* ToDoCell.swift in Sources */,
 				63B261C027F230D1005C7E93 /* AppDelegate.swift in Sources */,
 				63B261C227F230D1005C7E93 /* SceneDelegate.swift in Sources */,
 				63B261DA27F245E1005C7E93 /* TableViewController.swift in Sources */,

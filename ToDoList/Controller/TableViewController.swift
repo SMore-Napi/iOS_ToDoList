@@ -67,7 +67,7 @@ class ToDoTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt
        indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:
-           "ToDoCellIdentifier", for: indexPath)
+           "ToDoCellIdentifier", for: indexPath) as! ToDoCell
         
     let toDo = toDos[indexPath.row]
     var content = cell.defaultContentConfiguration()
