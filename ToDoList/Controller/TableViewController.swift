@@ -7,27 +7,29 @@
 
 import UIKit
 
-class ToDoTableViewController: UITableViewController {
+class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
     var toDos = [ToDo]()
     
     @IBAction func unwindToToDoList(segue: UIStoryboardSegue) {
         guard segue.identifier == "saveUnwind" else { return }
-            let sourceViewController = segue.source as!
-               ToDoDetailTableViewController
-        
-            if let toDo = sourceViewController.toDo {
-                if let indexOfExistingToDo = toDos.firstIndex(of: toDo) {
-                    toDos[indexOfExistingToDo] = toDo
-                    tableView.reloadRows(at: [IndexPath(row: indexOfExistingToDo,
-                       section: 0)], with: .automatic)
-                } else {
-                    let newIndexPath = IndexPath(row: toDos.count, section: 0)
-                    toDos.append(toDo)
-                    tableView.insertRows(at: [newIndexPath], with: .automatic)
-                }
+        let sourceViewController = segue.source as!
+           ToDoDetailTableViewController
+    
+        if let toDo = sourceViewController.toDo {
+            if let indexOfExistingToDo = toDos.firstIndex(of: toDo) {
+                toDos[indexOfExistingToDo] = toDo
+                tableView.reloadRows(at: [IndexPath(row:
+                   indexOfExistingToDo, section: 0)], with: .automatic)
+            } else {
+                let newIndexPath = IndexPath(row: toDos.count, section: 0)
+                toDos.append(toDo)
+                tableView.insertRows(at: [newIndexPath],
+                   with: .automatic)
             }
-
+        }
+        ToDo.saveToDos(toDos)
     }
+    
     
     
     @IBSegueAction func editToDo(_ coder: NSCoder, sender: Any?) -> ToDoDetailTableViewController? {
@@ -46,6 +48,15 @@ class ToDoTableViewController: UITableViewController {
         return detailController
     }
     
+    func checkmarkTapped(sender: ToDoCell) {
+        if let indexPath = tableView.indexPath(for: sender) {
+            var toDo = toDos[indexPath.row]
+            toDo.isComplete.toggle()
+            toDos[indexPath.row] = toDo
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            ToDo.saveToDos(toDos)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,12 +79,15 @@ class ToDoTableViewController: UITableViewController {
        indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:
            "ToDoCellIdentifier", for: indexPath) as! ToDoCell
+    
+        cell.delegate = self
         
-    let toDo = toDos[indexPath.row]
-    var content = cell.defaultContentConfiguration()
-    content.text = toDo.title
-    cell.contentConfiguration = content
-    return cell
+        let toDo = toDos[indexPath.row]
+        cell.titleLabel?.text = toDo.title
+        cell.isCompleteButton.isSelected = toDo.isComplete
+    
+    
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt
@@ -81,12 +95,13 @@ class ToDoTableViewController: UITableViewController {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, commit
-       editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath:
-       IndexPath) {
+    override func tableView(_ tableView: UITableView,
+       commit editingStyle: UITableViewCell.EditingStyle,
+       forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             toDos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            ToDo.saveToDos(toDos)
         }
     }
 }
