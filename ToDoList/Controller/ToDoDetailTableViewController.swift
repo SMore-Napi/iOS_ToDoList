@@ -15,7 +15,6 @@ class ToDoDetailTableViewController: UITableViewController {
     @IBOutlet weak var dueDateLabel: UILabel!
     @IBOutlet weak var dueDateDatePicker: UIDatePicker!
     @IBOutlet weak var notesTextView: UITextView!
-    
     @IBOutlet weak var linkText: UITextField!
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -37,6 +36,7 @@ class ToDoDetailTableViewController: UITableViewController {
           isCompleteButton.isSelected = toDo.isComplete
           currentDueDate = toDo.dueDate
           notesTextView.text = toDo.notes
+            linkText.text = toDo.link
         } else {
           currentDueDate = Date().addingTimeInterval(24*60*60)
         }
@@ -114,14 +114,15 @@ class ToDoDetailTableViewController: UITableViewController {
         let isComplete = isCompleteButton.isSelected
         let dueDate = dueDateDatePicker.date
         let notes = notesTextView.text
+        let link = linkText.text
         if toDo != nil {
                 toDo?.title = title
                 toDo?.isComplete = isComplete
                 toDo?.dueDate = dueDate
                 toDo?.notes = notes
+                toDo?.link = link
             } else {
-                toDo = ToDo(title: title, isComplete: isComplete,
-                   dueDate: dueDate, notes: notes)
+                toDo = ToDo(title: title, isComplete: isComplete, dueDate: dueDate, notes: notes, link: link)
             }
     }
     
@@ -133,10 +134,7 @@ class ToDoDetailTableViewController: UITableViewController {
             }
     }
     
-    
     @IBAction func shareQueue(_ sender: UIButton) {
-        
-        
         let description = "Hey! I have my to-do \(titleTextField.text!) until \(dueDateLabel.text!)"
             let activityController =
            UIActivityViewController(activityItems: [description],
