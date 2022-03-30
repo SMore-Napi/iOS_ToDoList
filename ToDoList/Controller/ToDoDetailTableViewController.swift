@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class ToDoDetailTableViewController: UITableViewController {
     
@@ -15,7 +16,10 @@ class ToDoDetailTableViewController: UITableViewController {
     @IBOutlet weak var dueDateDatePicker: UIDatePicker!
     @IBOutlet weak var notesTextView: UITextView!
     
+    @IBOutlet weak var linkText: UITextField!
+    
     @IBOutlet weak var saveButton: UIBarButtonItem!
+   
     
     var isDatePickerHidden = true
     let dateLabelIndexPath = IndexPath(row: 0, section: 1)
@@ -120,4 +124,26 @@ class ToDoDetailTableViewController: UITableViewController {
                    dueDate: dueDate, notes: notes)
             }
     }
+    
+    @IBAction func openLinkInSafary(_ sender: UIButton) {
+        if let url = URL(string: linkText.text!) {
+                let safariViewController = SFSafariViewController(url: url)
+                present(safariViewController, animated: true,
+                   completion: nil)
+            }
+    }
+    
+    
+    @IBAction func shareQueue(_ sender: UIButton) {
+        
+        
+        let description = "Hey! I have my to-do \(titleTextField.text!) until \(dueDateLabel.text!)"
+            let activityController =
+           UIActivityViewController(activityItems: [description],
+              applicationActivities: nil)
+            activityController.popoverPresentationController?.sourceView =
+               sender
+            present(activityController, animated: true, completion: nil)
+    }
+    
 }

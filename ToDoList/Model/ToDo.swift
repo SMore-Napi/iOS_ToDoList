@@ -58,4 +58,6 @@ struct ToDo: Equatable, Codable {
         let codedToDos = try? propertyListEncoder.encode(toDos)
         try? codedToDos?.write(to: archiveURL, options: .noFileProtection)
     }
+    
+    
 }
